@@ -8,6 +8,8 @@ type Job<Type extends JobType = JobType> = {
   userData: ZIngestBody
   delay?: number
   actionData: ActionData[Type]
+  flowId: number
+  nodeId: number
 }
 
 type WorkerCb = Parameters<InstanceType<typeof Queue>['dequeue']>[1]
@@ -17,6 +19,7 @@ class Queue {
   private jobs: Job[] = []
   private workers = {} as Record<JobType, WorkerCb[]>
   private timeouts: NodeJS.Timeout[] = []
+  private processingJob = false
 
   addJob<T extends JobType>({ delay, ...job }: Job<T>) {
     if (delay) return this.timeouts.push(setTimeout(() => this.addJob(job), delay))
@@ -26,20 +29,25 @@ class Queue {
   }
 
   private processJobs() {
+    if (this.processingJob) return
+
     const jobToProcess = this.jobs[0]
     if (!jobToProcess) return
 
+    this.processingJob = true
     const randomWorkerIndex = Math.floor(Math.random() * this.workers[jobToProcess.type].length)
     this.workers[jobToProcess.type]
       [randomWorkerIndex](jobToProcess)
       .then(() => {
         this.jobs.shift()
+        this.processingJob = false
         this.processJobs()
       })
       .catch((err) => {
         // TODO: handle error
         console.error(err)
         this.jobs.shift()
+        this.processingJob = false
         this.processJobs()
       })
   }

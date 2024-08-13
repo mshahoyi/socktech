@@ -5,12 +5,12 @@ type TriggerNode = {
   eventName: string
 }
 
-type ActionData = {
+export type ActionData = {
   [zActionType.enum.SEND_EMAIL]: { subject: string; body: string }
   [zActionType.enum.WAIT]: { time: number }
 }
 
-type ActionNode<AT extends ZActionType = ZActionType> = {
+export type ActionNode<AT extends ZActionType = ZActionType> = {
   actionType: AT
   actionData: ActionData[AT]
 }
@@ -28,8 +28,10 @@ export class Flow {
     this.triggerNodeId = triggerNode.id
   }
 
-  get triggerNode(): DAGNode<TriggerNode> {
-    return this.dag.getNode(this.triggerNodeId) as DAGNode<TriggerNode>
+  get triggerNode() {
+    return this.dag.getNode(this.triggerNodeId) as Omit<DAGNode<TriggerNode>, 'children'> & {
+      children: Set<DAGNode<ActionNode>>
+    }
   }
 
   addAction(data: ActionNode, fromId: number, actionId = Math.random()) {
@@ -37,5 +39,9 @@ export class Flow {
     this.dag.addEdge(fromId, newNode.id)
 
     return newNode
+  }
+
+  getActionNode(actionId: number): DAGNode<ActionNode> {
+    return this.dag.getNode(actionId) as DAGNode<ActionNode>
   }
 }

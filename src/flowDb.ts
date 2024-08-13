@@ -26,6 +26,10 @@ class FlowDbService {
   async getFlowsForEvent(eventName: string): Promise<Flow[]> {
     return this.flows.filter((flow) => flow.triggeringEvent === eventName)
   }
+
+  async getFlowById(flowId: number): Promise<Flow | undefined> {
+    return this.flows.find((flow) => flow.id === flowId)
+  }
 }
 
 export const flowDb = new FlowDbService()

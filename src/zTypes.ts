@@ -7,6 +7,7 @@ export const zIngestBody = z.object({
   eventName: z.string().min(1),
   userEmail: z.string().min(1),
 })
+export type ZIngestBody = z.infer<typeof zIngestBody>
 
 export const zActionType = z.enum(['SEND_EMAIL', 'WAIT'])
 export type ZActionType = z.infer<typeof zActionType>

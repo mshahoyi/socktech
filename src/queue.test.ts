@@ -21,6 +21,8 @@ describe('queue', () => {
       type: 'SEND_EMAIL',
       userData: { eventName: 'test', userEmail: 'test@test.com' },
       actionData: { body: 'test body', subject: 'test subject' },
+      flowId: 1,
+      nodeId: 2,
     })
   })
 
@@ -36,6 +38,8 @@ describe('queue', () => {
       type: 'WAIT',
       userData: { eventName: 'test', userEmail: 'test@test.com' },
       actionData: { time: 10000 },
+      flowId: 1,
+      nodeId: 2,
     })
   })
 
@@ -52,6 +56,24 @@ describe('queue', () => {
       userData: { eventName: 'test', userEmail: 'test@test.com' },
       delay: 10000,
       actionData: { time: 10000 },
+      flowId: 1,
+      nodeId: 2,
+    })
+    jest.runOnlyPendingTimers()
+  })
+
+  it.skip("a second job won't be processed until the first job is finished", (done) => {
+    const fn = jest.fn()
+
+    queue.dequeue('SEND_EMAIL', fn)
+
+    queue.addJob({
+      type: 'WAIT',
+      userData: { eventName: 'test', userEmail: 'test@test.com' },
+      delay: 10000,
+      actionData: { time: 10000 },
+      flowId: 1,
+      nodeId: 2,
     })
     jest.runOnlyPendingTimers()
   })
