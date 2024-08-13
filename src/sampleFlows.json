@@ -1,0 +1,36 @@
+[
+  {
+    "triggeringEventName": "websiteSignup",
+    "actions": [
+      {
+        "id": 1,
+        "actionType": "WAIT",
+        "actionData": { "time": 7200 },
+        "fromId": null
+      },
+      {
+        "id": 2,
+        "actionType": "SEND_EMAIL",
+        "actionData": { "subject": "Welcome!", "body": "Need some socks?" },
+        "fromId": 1
+      }
+    ]
+  },
+  {
+    "triggeringEventName": "socksPurchased",
+    "actions": [
+      {
+        "id": 1,
+        "actionType": "SEND_EMAIL",
+        "actionData": { "subject": "Payment received", "body": "Thank you!" },
+        "fromId": null
+      },
+      {
+        "id": 2,
+        "actionType": "SEND_EMAIL",
+        "actionData": { "subject": "Socks dispatched!", "body": "Get ready!" },
+        "fromId": 1
+      }
+    ]
+  }
+]

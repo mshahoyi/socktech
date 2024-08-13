@@ -1,5 +1,6 @@
 import express from 'express'
 import { zIngestBody } from './zTypes'
+import { flowDb } from './flowDb'
 
 const app = express()
 const port = 3000
@@ -14,7 +15,7 @@ app.post('/ingest', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send(flowDb.getFlowsForEvent('websiteSignup'))
 })
 
 app.listen(port, () => {

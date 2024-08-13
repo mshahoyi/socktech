@@ -25,6 +25,14 @@ describe('DAG', () => {
     expect(() => dag.addEdge(1, 2)).toThrow()
   })
 
+  it('throws if a node tries to child itself', () => {
+    const dag = new DAG()
+
+    const node = dag.addNode('test')
+
+    expect(() => dag.addEdge(node.id, node.id)).toThrow()
+  })
+
   it.todo('throws an error if adding an edge would create a cycle')
   it.todo('can provide a topological sort of the nodes')
 })

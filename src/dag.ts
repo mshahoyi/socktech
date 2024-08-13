@@ -1,4 +1,6 @@
-class DAGNode<T> {
+import assert from 'assert'
+
+export class DAGNode<T> {
   public children: Set<DAGNode<T>> = new Set<DAGNode<T>>()
 
   constructor(
@@ -27,6 +29,8 @@ export class DAG<T> {
   }
 
   addEdge(fromId: number, toId: number): void {
+    assert(fromId !== toId, "Can't add an edge to a node that is the same as the origin")
+
     const originNode = this.nodes.get(fromId)
     const targetNode = this.nodes.get(toId)
 
