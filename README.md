@@ -52,3 +52,5 @@ The DAG can be extended to implement the properties of a `Flow`, which consists 
   - [ ] Trigger sample flow
 - [ ] Retry mechanism for queue jobs with exponential back-offs
 - [ ] Flows that only run once per event per user
+- [ ] Throw error if adding edge to DAG would create a cycle
+- [ ] Add a topological sort method to DAG
