@@ -36,19 +36,19 @@ The DAG can be extended to implement the properties of a `Flow`, which consists 
 
 ### TODOs
 
-[] Setup project (linting, testing, etc.)
-[] Setup endpoint to ingest events
-[] Implement DAGs
-[] Extend DAGs to implement flows
-[] Implement flow db
-[] Process events and trigger flows
-[] Implement a Queue
-[] Process queue jobs in a worker
-[] Update flow execution status in a db
-[] Implement a simple front page for our API showing us these information
-[] Running flows
-[] Completed flows
-[] Failed flows
-[] Trigger sample flow
-[] Retry mechanism for queue jobs with exponential back-offs
-[] Flows that only run once per event per user
+- [ ] Setup project (linting, testing, formatting)
+- [ ] Setup endpoint to ingest events
+- [ ] Implement DAGs
+- [ ] Extend DAGs to implement flows
+- [ ] Implement flow db
+- [ ] Process events and trigger flows
+- [ ] Implement a Queue
+- [ ] Process queue jobs in a worker
+- [ ] Update flow execution status in a db
+- [ ] Implement a simple front page for our API showing us these information
+  - [ ] Running flows
+  - [ ] Completed flows
+  - [ ] Failed flows
+  - [ ] Trigger sample flow
+- [ ] Retry mechanism for queue jobs with exponential back-offs
+- [ ] Flows that only run once per event per user
