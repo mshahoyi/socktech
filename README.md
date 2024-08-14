@@ -18,6 +18,12 @@ Start development server:
 pnpm dev
 ```
 
+Run tests:
+
+```bash
+pnpm test
+```
+
 ### An events journey
 
 1. The event is ingested through an endpoint with its name and the email of the user.
