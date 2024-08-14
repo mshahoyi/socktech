@@ -1,9 +1,21 @@
 # Socktech
 
-To run this project:
+Install dependencies:
 
 ```bash
-bun install && bun start
+pnpm i
+```
+
+Build and start the server:
+
+```bash
+pnpm build && pnpm start
+```
+
+Start development server:
+
+```bash
+pnpm dev
 ```
 
 ### An events journey
